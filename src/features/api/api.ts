@@ -4,17 +4,18 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 
 
 
+
 export const fetchWeather =createAsyncThunk(
     'fetchWeather',
     async (city:string)=>{
         const response = await fetch(`${base_url}?q=${city}&appid=${api_key}&units=metric`);
         const data = await response.json();
         return {
-            country: data.sys.country,
-            city: data.name,
-            temp: data.main.temp,
-            pressure: data.main.pressure,
-            sunset: data.sys.sunset*1000,
+            country: data.sys.country as string,
+            city: data.name as string,
+            temp: data.main.temp as number,
+            pressure: data.main.pressure as number,
+            sunset: data.sys.sunset*1000 as number,
         }
     }
 )

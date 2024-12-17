@@ -1,6 +1,6 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {fetchWeather} from "../api/api.ts";
-import {weatherStateType} from "../types/types";
+import {weatherPayloadType, weatherStateType} from "../types/types";
 
 
 const initialState:weatherStateType={
@@ -21,7 +21,7 @@ export const weatherSlice = createSlice({
             .addCase(fetchWeather.pending,
                 (state)=>({...state, message:"Loading..."}))
             .addCase(fetchWeather.fulfilled,
-                (state,action)=>( {...state,...action.payload,message:""}))
+                (state,action:PayloadAction<weatherPayloadType>)=>( {...state,...action.payload,message:""}))
             .addCase(fetchWeather.rejected,
                 (state)=>( {...state,message:"This city doesn't exist"}))
     }
