@@ -13,4 +13,5 @@ export interface weatherPayloadType{
     temp: number,
     pressure: number,
     sunset:number,
+
 }
